@@ -45,7 +45,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 ?>
 
 <?php include("head.php"); ?>
-<title>フリーアンケート表示</title>
+<title>自分の口コミ一覧</title>
 <link rel="stylesheet" href="css/select.css">
 </head>
 
@@ -65,12 +65,10 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
           <th>更新</th>
           <th>削除</th>
         </tr>
-        </tr>
-        </tr>
         <tr>
           <td><?= $v["rating"] ?></td>
           <td><?= $v["review"] ?></td>
-          <td><?= $v["image"] ?></td>
+          <td><img src="<?= $v["image"] ?>" alt=""></td>
           <td><a href="detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
           <td><a href="delete.php?id=<?= $v["id"] ?>">[削除]</a></td>
 
