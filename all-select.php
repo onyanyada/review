@@ -11,9 +11,38 @@ sschk();
 //2. DB接続します
 $pdo = db_conn();
 
-//レビューを取得
+// クエリの作成
 $sql = "SELECT * FROM review";
+
+// 絞り込みがある場合のクエリの追加
+if (isset($_GET['rating_filter']) && $_GET['rating_filter'] != "") {
+    $sql .= " WHERE rating = :rating_filter";
+}
+
+// 並び替えの条件を設定
+if (isset($_GET['sort'])) {
+    if ($_GET['sort'] == 'rating_desc') {
+        $sql .= " ORDER BY rating DESC";
+    } elseif ($_GET['sort'] == 'rating_asc') {
+        $sql .= " ORDER BY rating ASC";
+    } elseif ($_GET['sort'] == 'date_desc') {
+        $sql .= " ORDER BY indate DESC";
+    } elseif ($_GET['sort'] == 'date_asc') {
+        $sql .= " ORDER BY indate ASC";
+    }
+} else {
+    $sql .= " ORDER BY indate DESC";
+}
+
+// SQL実行の準備
 $stmt = $pdo->prepare($sql);
+
+// 絞り込みのための値をバインド
+if (isset($_GET['rating_filter']) && $_GET['rating_filter'] != "") {
+    $stmt->bindValue(':rating_filter', $_GET['rating_filter'], PDO::PARAM_INT);
+}
+
+// SQL実行
 $status = $stmt->execute();
 
 
@@ -40,6 +69,27 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <main>
         <h2>皆の口コミ一覧</h2>
+        <form method="GET" action="">
+            <label for="sort">並び替え:</label>
+            <select name="sort" id="sort">
+                <option value="date_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_desc') ? 'selected' : '' ?>>新しい順</option>
+                <option value="date_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_asc') ? 'selected' : '' ?>>古い順</option>
+                <option value="rating_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'rating_desc') ? 'selected' : '' ?>>評価が高い順</option>
+                <option value="rating_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'rating_asc') ? 'selected' : '' ?>>評価が低い順</option>
+            </select>
+
+            <label for="rating_filter">評価の絞り込み:</label>
+            <select name="rating_filter" id="rating_filter">
+                <option value="">すべて</option>
+                <option value="5" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '5') ? 'selected' : '' ?>>5</option>
+                <option value="4" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '4') ? 'selected' : '' ?>>4</option>
+                <option value="3" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '3') ? 'selected' : '' ?>>3</option>
+                <option value="2" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '2') ? 'selected' : '' ?>>2</option>
+                <option value="1" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '1') ? 'selected' : '' ?>>1</option>
+            </select>
+
+            <button type="submit">適用</button>
+        </form>
         <table>
             <?php foreach ($values as $v) { ?>
                 <tr>

@@ -62,6 +62,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
           <th>評価</th>
           <th>口コミ内容</th>
           <th>投稿画像</th>
+          <th>投稿日</th>
           <th>更新</th>
           <th>削除</th>
         </tr>
@@ -78,6 +79,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
             ?>
           </td>
           <td><img src="<?= $v["image"] ?>" alt=""></td>
+          <td><?= mb_substr($v["indate"], 0, 10) ?></td>
           <td><a href="detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
           <td><a href="delete.php?id=<?= $v["id"] ?>">[削除]</a></td>
 
