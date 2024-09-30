@@ -1,9 +1,14 @@
 <?php
 session_start();
+include("funcs.php");
+sschk();
 //1. POSTデータ取得
 $rating  = $_POST["rating"];
 $review = $_POST["review"];
 $id     = $_POST["id"];
+
+// 画像がアップロードされていない場合の処理
+$image = null;
 
 // 画像処理
 if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
@@ -21,11 +26,25 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
   }
 }
 
-
 //2. DB接続します
-include("funcs.php");
-sschk();
 $pdo = db_conn();
+
+// 既存の画像パスを取得する
+if ($image === null) {
+  // 画像がアップロードされていない場合、既存の画像パスを取得
+  $stmt = $pdo->prepare("SELECT image FROM review WHERE id=:id");
+  $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  if ($result) {
+    $image = $result['image']; // 既存の画像パスをセット
+  } else {
+    echo "データが見つかりませんでした。";
+    exit();
+  }
+}
+
+
 
 //３.データ更新
 $stmt = $pdo->prepare("UPDATE review SET 
