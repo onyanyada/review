@@ -1,0 +1,66 @@
+header {
+    text-align: center;
+}
+
+main {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.results {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.item {
+    width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 30px 0px;
+}
+
+#timeChart {
+    width: 200px !important;
+    height: 200px !important;
+    margin: 0 auto;
+}
+
+.data-results {
+    margin: 50px 0px;
+    /* text-align: center; */
+}
+
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+tr:nth-child(even) {
+    background-color: #BFC7CE;
+}
+
+th {
+    background-color: #6c7277;
+    color: white;
+    padding: 12px 15px;
+    /* border: 1px solid #ddd; */
+    text-align: center;
+    vertical-align: middle;
+}
+
+th:nth-child(1),
+td:nth-child(1) {
+    padding-left: 20px;
+}
+
+td {
+    padding: 10px 15px;
+    /* border: 1px solid #141414; */
+}
+
+
+th:nth-child(13),
+td:nth-child(13) {
+    padding-right: 20px;
+}

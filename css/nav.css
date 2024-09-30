@@ -1,0 +1,18 @@
+.login-header {
+    display: flex;
+    align-items: center;
+    /* 子要素の垂直揃え */
+    justify-content: space-between;
+    /* 必要に応じて要素の間隔を調整 */
+    background-color: #d6f2f5;
+    padding-right: 30px;
+    height: 80px;
+}
+
+ul {
+    display: flex;
+}
+
+li {
+    margin-right: 20px;
+}

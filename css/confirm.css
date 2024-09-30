@@ -1,0 +1,21 @@
+.confritm-msg {
+    text-align: center;
+    margin-top: 40px;
+}
+
+table {
+    background-color: #fff;
+    margin-top: 30px;
+}
+
+td {
+    font-size: 14px;
+}
+
+
+td:nth-child(1) {
+    background-color: #9e3c41;
+    color: #ffffff;
+    width: 150px;
+}
+
