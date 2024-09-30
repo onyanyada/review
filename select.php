@@ -24,13 +24,6 @@ sschk();
 
   </main>
 
-  <script>
-    const datas = <?= $json; ?>;
-    console.dir(datas);
-    const tz_datas = <?= $tz_json; ?>;
-    console.dir(tz_datas);
-  </script>
-
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 

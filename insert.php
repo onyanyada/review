@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 //1. POSTデータ取得
 $rating  = $_POST["rating"];
 $review = $_POST["review"];
@@ -36,10 +37,25 @@ $_SESSION["review"] = $review;
 include("funcs.php");
 $pdo = db_conn();
 
-//３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO review(rating,review,image,indate)
-VALUES(:rating,:review,:image,sysdate())");
+//3. ユーザーIDをセッションのlidから取得
+$lid = $_SESSION['lid'];
+$stmt = $pdo->prepare("SELECT id FROM user WHERE lid = :lid");
+$stmt->bindValue(':lid', $lid, PDO::PARAM_STR);
+$status = $stmt->execute();
+$user = $stmt->fetch(PDO::FETCH_ASSOC); //ユーザー情報を取得
 
+if (!$user) {
+  echo "ユーザーが見つかりません。";
+  exit();
+}
+
+$user_id = $user['id']; // userテーブルから取得したユーザーID
+
+//３．データ登録SQL作成
+$stmt = $pdo->prepare("INSERT INTO review(user_id,rating,review,image,indate)
+VALUES(:user_id,:rating,:review,:image,sysdate())");
+
+$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->bindValue(':rating', $rating, PDO::PARAM_INT);
 $stmt->bindValue(':review', $review, PDO::PARAM_STR);
 $stmt->bindValue(':image', $image_path, PDO::PARAM_STR);

@@ -2,15 +2,12 @@
 session_start(); // セッションを開始
 include("funcs.php");
 sschk();
+
 // セッションからデータを取得
 $rating        = isset($_SESSION["rating"]) ? $_SESSION["rating"] : 'なし';
 $review       = isset($_SESSION["review"]) ? $_SESSION["review"] : 'なし';
 $image    = isset($_SESSION["image"]) ? $_SESSION["image"] : 'なし';
 
-
-// セッションデータをクリア（完了後は不要なセッションデータを消す）
-session_unset();
-session_destroy();
 ?>
 
 <?php include("head.php"); ?>
@@ -25,9 +22,6 @@ session_destroy();
     <header>
         <h1>送信完了</h1>
     </header>
-    <!-- Head[End] -->
-
-    <!-- Main[Start] -->
     <main>
 
         <p class="complete">アンケートを送信しました</p>
