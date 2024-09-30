@@ -37,7 +37,7 @@ $image    = isset($_SESSION["image"]) ? $_SESSION["image"] : 'なし';
                 </tr>
                 <tr>
                     <td>画像</td>
-                    <td><?= h($image) ?></td>
+                    <td><img src="<?= h($image) ?>" alt=""></td>
                 </tr>
             </table>
 

@@ -67,7 +67,16 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
         </tr>
         <tr>
           <td><?= $v["rating"] ?></td>
-          <td><?= $v["review"] ?></td>
+          <td>
+            <?php
+            // 口コミ内容が30文字以上の場合、31文字以降を非表示にし「...」を表示
+            if (mb_strlen($v["review"]) > 30) {
+              echo mb_substr($v["review"], 0, 30) . "...";
+            } else {
+              echo $v["review"];
+            }
+            ?>
+          </td>
           <td><img src="<?= $v["image"] ?>" alt=""></td>
           <td><a href="detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
           <td><a href="delete.php?id=<?= $v["id"] ?>">[削除]</a></td>

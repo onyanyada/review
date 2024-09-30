@@ -5,9 +5,12 @@ include_once("funcs.php");
     <div class="nav">
         <ul>
             <li>
-                <a class="nav-item" href="select.php">口コミ一覧</a>
+                <a class="nav-item" href="all-select.php">皆の口コミ一覧</a>
             </li>
             <?php if (isset($_SESSION["name"])) { ?>
+                <li>
+                    <a class="nav-item" href="select.php">自分の口コミ一覧</a>
+                </li>
                 <li>
                     <a class="nav-item" href="index.php">口コミ投稿</a>
                 </li>
