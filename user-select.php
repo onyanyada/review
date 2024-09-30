@@ -44,22 +44,21 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <!-- Main[Start] -->
     <div>
-        <div class="container jumbotron">
+        <a class="" href="select.php">自分の口コミ一覧</a>
 
-            <table>
-                <?php foreach ($values as $v) { ?>
-                    <tr>
-                        <td><?= h($v["id"]) ?></td>
-                        <td><?= h($v["name"]) ?></td>
-                        <td><?= h($v["lid"]) ?></td>
-                        <td><?= h($v["lpw"]) ?></td>
-                        <td><?= h($v["life_flg"]) ?></td>
-                        <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
-                    </tr>
-                <?php } ?>
-            </table>
+        <table>
+            <?php foreach ($values as $v) { ?>
+                <tr>
+                    <td><?= h($v["id"]) ?></td>
+                    <td><?= h($v["name"]) ?></td>
+                    <td><?= h($v["lid"]) ?></td>
+                    <td><?= h($v["lpw"]) ?></td>
+                    <td><?= h($v["life_flg"]) ?></td>
+                    <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
+                </tr>
+            <?php } ?>
+        </table>
 
-        </div>
     </div>
     <!-- Main[End] -->
 

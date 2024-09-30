@@ -1,27 +1,27 @@
 <?php
+session_start();
+include("funcs.php");
+
 // POSTで送られてきたデータを受け取る
-$name  = $_POST["name"];
-$email = $_POST["email"];
-$spending  = $_POST["spending"];
-$income  = $_POST["income"];
-$age  = $_POST["age"];
-$gender  = $_POST["gender"];
-$hour  = $_POST["hour"];
-$timeZone = isset($_POST['timeZone']) ? $_POST['timeZone'] : [];
-$timeZoneStr = implode(".", $timeZone);
-$region  = $_POST["region"];
+$_SESSION["rating"]  = $_POST["rating"];
+$_SESSION["review"]  = $_POST["review"];
+$image  = $_FILES["image"];
+
+// 画像ファイルの処理
+if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    // 一時ファイルのパスをセッションに保存
+    $temp_image_path = $_FILES['image']['tmp_name'];
+    $_SESSION["temp_image_path"] = $temp_image_path;
+}
 ?>
 
-<!DOCTYPE html>
-<html lang="ja">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>確認画面</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/confirm.css">
+<?php include("head.php"); ?>
+<title>口コミ投稿確認</title>
+<link rel="stylesheet" href="css/index.css">
 </head>
+
+<!-- header -->
+<?php include("menu.php"); ?>
 
 <body>
     <header>
@@ -29,62 +29,33 @@ $region  = $_POST["region"];
     </header>
     <main>
         <div class="form-wrapper">
-            <div class="confritm-msg">
+            <div class="confirm-msg">
                 <p>以下の内容で送信しますか？</p>
             </div>
-            <form action="insert.php" method="post">
+            <form action="insert.php" method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
-                        <td>名前</td>
-                        <td><?= htmlspecialchars($name) ?></td>
+                        <td>評価</td>
+                        <td><?= h($_SESSION["name"]) ?></td>
                     </tr>
                     <tr>
-                        <td>Email</td>
-                        <td><?= htmlspecialchars($email) ?></td>
+                        <td>レビュー</td>
+                        <td><?= h($_SESSION["review"]) ?></td>
                     </tr>
                     <tr>
-                        <td>漫画年間支出額</td>
-                        <td><?= htmlspecialchars($spending) ?></td>
-                    </tr>
-                    <tr>
-                        <td>収入</td>
-                        <td><?= htmlspecialchars($income) ?></td>
-                    </tr>
-                    <tr>
-                        <td>年齢</td>
-                        <td><?= htmlspecialchars($age) ?></td>
-                    </tr>
-                    <tr>
-                        <td>性別</td>
-                        <td><?= htmlspecialchars($gender) ?></td>
-                    </tr>
-                    <tr>
-                        <td>時間/週</td>
-                        <td><?= htmlspecialchars($hour) ?></td>
-                    </tr>
-                    <tr>
-                        <td>時間帯</td>
-                        <td><?= htmlspecialchars($timeZoneStr) ?></td>
-                    </tr>
-                    <tr>
-                        <td>地域</td>
-                        <td><?= htmlspecialchars($region) ?></td>
+                        <td>画像</td>
+                        <td>
+                            <?php if (isset($_SESSION["temp_image_path"])): ?>
+                                <img src="<?= 'data:image/jpeg;base64,' . base64_encode(file_get_contents($_SESSION["temp_image_path"])); ?>" width="150">
+                                <input type="hidden" name="image_temp_path" value="<?= $_SESSION["temp_image_path"] ?>">
+
+
+                            <?php else: ?>
+                                画像はありません。
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 </table>
-                <!-- 確認用にデータを再送信 -->
-                <input type="hidden" name="name" value="<?= htmlspecialchars($name) ?>">
-                <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
-                <input type="hidden" name="spending" value="<?= htmlspecialchars($spending) ?>">
-                <input type="hidden" name="income" value="<?= htmlspecialchars($income) ?>">
-                <input type="hidden" name="age" value="<?= htmlspecialchars($age) ?>">
-                <input type="hidden" name="gender" value="<?= htmlspecialchars($gender) ?>">
-                <input type="hidden" name="hour" value="<?= htmlspecialchars($hour) ?>">
-                <input type="hidden" name="timeZoneStr" value="<?= htmlspecialchars($timeZoneStr) ?>">
-                <input type="hidden" name="region" value="<?= htmlspecialchars($region) ?>">
-                <!-- TimeZone配列の各要素を個別に送信 -->
-                <?php foreach ($timeZone as $tz): ?>
-                    <input type="hidden" name="timeZone[]" value="<?= htmlspecialchars($tz) ?>">
-                <?php endforeach; ?>
                 <button type="submit">送信する</button>
             </form>
         </div>

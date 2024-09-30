@@ -12,7 +12,6 @@ sschk();
 <?php include("head.php"); ?>
 <title>フリーアンケート表示</title>
 <link rel="stylesheet" href="css/select.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>

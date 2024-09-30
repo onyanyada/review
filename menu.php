@@ -7,17 +7,20 @@ include_once("funcs.php");
             <li>
                 <a class="nav-item" href="select.php">口コミ一覧</a>
             </li>
+            <?php if (isset($_SESSION["name"])) { ?>
+                <li>
+                    <a class="nav-item" href="index.php">口コミ投稿</a>
+                </li>
+                <li>
+                    <a class="nav-item" href="logout.php">ログアウト</a>
+                </li>
+            <?php } ?>
             <?php if (!isset($_SESSION["name"])) { ?>
                 <li>
                     <a class="nav-item" href="user.php">ユーザー登録</a>
                 </li>
                 <li>
                     <a class="nav-item" href="login.php">ログイン</a>
-                </li>
-            <?php } ?>
-            <?php if (isset($_SESSION["name"])) { ?>
-                <li>
-                    <a class="nav-item" href="logout.php">ログアウト</a>
                 </li>
             <?php } ?>
         </ul>

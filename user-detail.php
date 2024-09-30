@@ -35,6 +35,9 @@ if ($status == false) {
 
 <body>
     <?php include("menu.php"); ?>
+
+
+
     <h2>ユーザーデータ更新</h2>
 
     <form method="POST" action="user-update.php">

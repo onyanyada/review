@@ -1,27 +1,35 @@
 <?php
 session_start();
 //1. POSTデータ取得
-$name  = $_POST["name"];
-$email = $_POST["email"];
-$spending  = $_POST["spending"];
-$income  = $_POST["income"];
-$age  = $_POST["age"];
-$gender  = $_POST["gender"];
-$hour  = $_POST["hour"];
-$timeZone = isset($_POST['timeZone']) ? $_POST['timeZone'] : [];
-$timeZoneStr = $_POST["timeZoneStr"];
-$region  = $_POST["region"];
+$rating  = $_POST["rating"];
+$review = $_POST["review"];
+$image = $_FILES["image"];
+
+// 画像ファイルの処理
+if ($image["error"] == 0) {
+  // アップロードされた画像の保存先ディレクトリを指定
+  $upload_dir = "img/";
+  // ユニークなファイル名を生成して、同名ファイルの衝突を回避
+  $image_name = uniqid() . "_" . basename($image["name"]);
+  $image_path = $upload_dir . $image_name;
+  $tmp_name = $image["tmp_name"]; // 一時ファイルのパス
+
+  // 画像を指定されたディレクトリに移動
+  if (move_uploaded_file($tmp_name, $image_path)) {
+    // 画像の移動が成功した場合の処理
+    $_SESSION["image"] = $image_path; // セッションに画像パスを保存
+  } else {
+    // エラー処理（ファイルの移動が失敗した場合）
+    echo "画像のアップロードに失敗しました。";
+    exit();
+  }
+} else {
+  $image_path = null; // 画像がアップロードされていない場合
+}
 
 // セッションにデータを保存
-$_SESSION["name"] = $name;
-$_SESSION["email"] = $email;
-$_SESSION["spending"] = $spending;
-$_SESSION["income"] = $income;
-$_SESSION["age"] = $age;
-$_SESSION["gender"] = $gender;
-$_SESSION["hour"] = $hour;
-$_SESSION["timeZoneStr"] = $timeZoneStr;
-$_SESSION["region"] = $region;
+$_SESSION["rating"] = $rating;
+$_SESSION["review"] = $review;
 
 
 //2. DB接続します
@@ -29,17 +37,12 @@ include("funcs.php");
 $pdo = db_conn();
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO form2_table(name,email,spending,income,age,gender,hour,region,indate)
-VALUES(:name,:email,:spending,:income,:age,:gender,:hour,:region,sysdate())");
+$stmt = $pdo->prepare("INSERT INTO review(rating,review,image,indate)
+VALUES(:rating,:review,:image,sysdate())");
 
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
-$stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':spending', $spending, PDO::PARAM_INT);
-$stmt->bindValue(':income', $income, PDO::PARAM_INT);
-$stmt->bindValue(':age', $age, PDO::PARAM_INT);
-$stmt->bindValue(':gender', $gender, PDO::PARAM_STR);
-$stmt->bindValue(':hour', $hour, PDO::PARAM_INT);
-$stmt->bindValue(':region', $region, PDO::PARAM_STR);
+$stmt->bindValue(':rating', $rating, PDO::PARAM_INT);
+$stmt->bindValue(':review', $review, PDO::PARAM_STR);
+$stmt->bindValue(':image', $image_path, PDO::PARAM_STR);
 $status = $stmt->execute(); //実行
 $lastInsertId = $pdo->lastInsertId(); // form2_tableに挿入されたIDを取得
 
@@ -48,16 +51,6 @@ $lastInsertId = $pdo->lastInsertId(); // form2_tableに挿入されたIDを取�
 if ($status == false) {
   sql_error($stmt);
 } else {
-  foreach ($timeZone as $tz) {
-    $tz_stmt = $pdo->prepare("INSERT INTO tz_table (timeZone, form2_id) VALUES (:timeZone, :form2_id)");
-    $tz_stmt->bindValue(':timeZone', $tz, PDO::PARAM_STR);
-    $tz_stmt->bindValue(':form2_id', $lastInsertId, PDO::PARAM_INT); // form2_tableのIDを関連付ける
-    $tz_status = $tz_stmt->execute(); // 実行
-
-    if ($tz_status == false) {
-      sql_error($tz_stmt); // エラーハンドリング
-    }
-  }
   // redirect("complete.php");
   header("Location: complete.php");
   exit();
