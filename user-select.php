@@ -34,6 +34,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
 <?php include("head.php"); ?>
 <title>USERデータ登録</title>
+<link rel="stylesheet" href="css/select.css">
 </head>
 
 <body>
@@ -44,20 +45,27 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <!-- Main[Start] -->
     <div>
-        <a class="" href="select.php">自分の口コミ一覧</a>
 
-        <table>
-            <?php foreach ($values as $v) { ?>
+        <div class="user-info">
+            <h2>プロフィール設定</h2>
+            <table>
                 <tr>
-                    <td><?= h($v["id"]) ?></td>
-                    <td><?= h($v["name"]) ?></td>
-                    <td><?= h($v["lid"]) ?></td>
-                    <td><?= h($v["lpw"]) ?></td>
-                    <td><?= h($v["life_flg"]) ?></td>
-                    <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
+                    <th>名前</th>
+                    <th>ログインID</th>
+                    <th>パスワード</th>
+                    <th>更新</th>
                 </tr>
-            <?php } ?>
-        </table>
+                <?php foreach ($values as $v) { ?>
+                    <tr>
+                        <td><?= h($v["name"]) ?></td>
+                        <td><?= h($v["lid"]) ?></td>
+                        <td><?= h($v["lpw"]) ?></td>
+                        <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
+                    </tr>
+                <?php } ?>
+            </table>
+        </div>
+        <a class="" href="select.php">自分の口コミ一覧を見る</a>
 
     </div>
     <!-- Main[End] -->

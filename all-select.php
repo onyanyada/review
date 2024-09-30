@@ -46,6 +46,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     <th>評価</th>
                     <th>口コミ内容</th>
                     <th>投稿画像</th>
+                    <th>投稿日</th>
                     <th>詳細</th>
                 </tr>
                 <tr>
@@ -61,6 +62,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                         ?>
                     </td>
                     <td><img src="<?= $v["image"] ?>" alt=""></td>
+                    <td><?= mb_substr($v["indate"], 0, 10) ?></td>
                     <td><a href="all-detail.php?id=<?= $v["id"] ?>">[詳細]</a></td>
                 </tr>
             <?php } ?>
