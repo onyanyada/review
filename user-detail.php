@@ -9,6 +9,7 @@ if (!isset($_GET["id"]) || empty($_GET["id"])) {
     exit(); // 処理を終了させます
 }
 $id = $_GET["id"]; //?id~**を受け取る
+$_SESSION["id"] = $id; // セッションにIDを保存
 include("funcs.php");
 sschk();
 $pdo = db_conn();
@@ -53,7 +54,10 @@ if ($status == false) {
         <input type="hidden" name="id" value="<?= $id ?>">
 
     </form>
+    <?php
 
+    ?>
+    <a href="user-delete-confirm.php">退会して完全削除する</a>
 
 </body>
 

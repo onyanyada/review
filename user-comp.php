@@ -25,7 +25,7 @@ session_start();
                 <td><?= h($_SESSION['lpwBefore']) ?></td>
             </tr>
         </table>
-        <a href="user.php">ユーザー登録画面に戻る</a>
+        <a href="login.php">ログインする</a>
     </main>
 
 </body>

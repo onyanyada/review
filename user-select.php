@@ -55,8 +55,6 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                         <td><?= h($v["lpw"]) ?></td>
                         <td><?= h($v["life_flg"]) ?></td>
                         <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
-                        <td><a href="user-delete.php?id=<?= $v["id"] ?>">[削除]</a></td>
-
                     </tr>
                 <?php } ?>
             </table>
