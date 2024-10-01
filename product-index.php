@@ -31,7 +31,7 @@ if (!isset($_SESSION['lid'])) {
                 <table>
                     <tr>
                         <td>商品名</td>
-                        <td><input type="text" name="name"></td>
+                        <td><input type="text" name="product_name"></td>
                     </tr>
                     <tr>
                         <td>カテゴリ1</td>

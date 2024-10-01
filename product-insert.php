@@ -3,14 +3,14 @@ ini_set("display_errors", 1);
 session_start();
 
 //1. POSTデータ取得
-$name  = $_POST["name"];
+$product_name  = $_POST["product_name"];
 $category1 = $_POST["category1"];
 $category2 = $_POST["category2"];
 $tag = $_POST["tag"];
 var_dump($tag);
 
 // セッションにデータを保存
-$_SESSION["name"] = $name;
+$_SESSION["product_name"] = $product_name;
 $_SESSION["category1"] = $category1;
 $_SESSION["category2"] = $category2;
 $_SESSION["tag"] = isset($_POST['tag']) ? $_POST['tag'] : [];
@@ -22,10 +22,10 @@ $pdo = db_conn();
 
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO product(name,category1,category2,indate)
-VALUES(:name,:category1,:category2,sysdate())");
+$stmt = $pdo->prepare("INSERT INTO product(product_name,category1,category2,indate)
+VALUES(:product_name,:category1,:category2,sysdate())");
 
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+$stmt->bindValue(':product_name', $product_name, PDO::PARAM_STR);
 $stmt->bindValue(':category1', $category1, PDO::PARAM_STR);
 $stmt->bindValue(':category2', $category2, PDO::PARAM_STR);
 $status = $stmt->execute(); //実行

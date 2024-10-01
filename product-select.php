@@ -58,13 +58,15 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     <th>カテゴリ2</th>
                     <th>タグ</th>
                     <th>詳細</th>
+                    <th>削除</th>
                 </tr>
                 <tr>
-                    <td><?= $v["name"] ?></td>
+                    <td><?= $v["product_name"] ?></td>
                     <td><?= $v["category1"] ?></td>
                     <td><?= $v["category2"] ?></td>
                     <td><?= $v["tag"] ?></td>
-                    <td><a href="product-detail.php?id=<?= $v["id"] ?>">[詳細]</a></td>
+                    <td><a href="product-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
+                    <td><a href="product-delete.php?id=<?= $v["id"] ?>">[削除]</a></td>
                 </tr>
             <?php } ?>
         </table>

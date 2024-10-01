@@ -3,7 +3,7 @@ session_start(); // セッションを開始
 include("funcs.php");
 // セッションからデータを取得
 // 必須入力項目は直接取得
-$name        = $_SESSION["name"];
+$product_name        = $_SESSION["product_name"];
 $category1       = $_SESSION["category1"];
 $category2    = $_SESSION["category2"];
 $tagstr      = $_SESSION["tagstr"];
@@ -38,7 +38,7 @@ $tagstr      = $_SESSION["tagstr"];
             <table>
                 <tr>
                     <td>商品名</td>
-                    <td><?= h($name) ?></td>
+                    <td><?= h($product_name) ?></td>
                 </tr>
                 <tr>
                     <td>カテゴリ1</td>

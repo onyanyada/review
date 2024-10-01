@@ -58,7 +58,7 @@ if ($tag_status == false) {
             <table>
                 <tr>
                     <td>商品名</td>
-                    <td><input type="text" name="name" value="<?= h($row['name']) ?>" required></td>
+                    <td><input type="text" name="product_name" value="<?= h($row['product_name']) ?>" required></td>
                 </tr>
                 <tr>
                     <td>カテゴリ1</td>

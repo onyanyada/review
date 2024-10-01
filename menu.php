@@ -11,6 +11,12 @@ include_once("funcs.php");
                 <li>
                     <a class="nav-item" href="index.php">口コミ投稿</a>
                 </li>
+                <li>
+                    <a class="nav-item" href="product-index.php">商品登録</a>
+                </li>
+                <li>
+                    <a class="nav-item" href="product-select.php">商品一覧</a>
+                </li>
 
             <?php } ?>
             <?php if (!isset($_SESSION["name"])) { ?>

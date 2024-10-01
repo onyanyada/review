@@ -1,7 +1,7 @@
 <?php
 session_start();
 //1. POSTデータ取得
-$name  = $_POST["name"];
+$product_name  = $_POST["product_name"];
 $category1 = $_POST["category1"];
 $category2 = $_POST["category2"];
 $tag = isset($_POST['tag']) ? $_POST['tag'] : [];
@@ -14,12 +14,12 @@ $pdo = db_conn();
 
 //３.form2_tableデータ更新
 $stmt = $pdo->prepare("UPDATE product SET 
-name=:name,
+product_name=:product_name,
 category1=:category1,
 category2=:category2
 WHERE id=:id");
 
-$stmt->bindValue(':name', $name, PDO::PARAM_STR);
+$stmt->bindValue(':product_name', $product_name, PDO::PARAM_STR);
 $stmt->bindValue(':category1', $category1, PDO::PARAM_STR);
 $stmt->bindValue(':category2', $category2, PDO::PARAM_STR);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
