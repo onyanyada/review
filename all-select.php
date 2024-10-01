@@ -6,7 +6,7 @@ session_start();
 include("funcs.php");
 
 //LOGINチェック → funcs.phpへ関数化しましょう！
-sschk();
+// sschk();
 
 //2. DB接続します
 $pdo = db_conn();
@@ -120,6 +120,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

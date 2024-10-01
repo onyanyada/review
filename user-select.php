@@ -65,7 +65,12 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                 <?php } ?>
             </table>
         </div>
-        <a class="" href="select.php">自分の口コミ一覧を見る</a>
+        <p>
+            <a class="" href="select.php">自分の口コミ一覧を見る</a>
+        </p>
+        <p>
+            <a class="nav-item" href="logout.php">ログアウト</a>
+        </p>
 
     </div>
     <!-- Main[End] -->

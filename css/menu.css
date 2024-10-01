@@ -1,0 +1,17 @@
+.current-user {
+    cursor: pointer;
+}
+
+.user-menu {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: #fff;
+}
+
+.user-menu ul {
+    display: flex;
+    flex-flow: column;
+    text-align: left;
+}

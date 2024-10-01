@@ -9,14 +9,9 @@ include_once("funcs.php");
             </li>
             <?php if (isset($_SESSION["name"])) { ?>
                 <li>
-                    <a class="nav-item" href="select.php">自分の口コミ一覧</a>
-                </li>
-                <li>
                     <a class="nav-item" href="index.php">口コミ投稿</a>
                 </li>
-                <li>
-                    <a class="nav-item" href="logout.php">ログアウト</a>
-                </li>
+
             <?php } ?>
             <?php if (!isset($_SESSION["name"])) { ?>
                 <li>
@@ -29,10 +24,18 @@ include_once("funcs.php");
         </ul>
     </div>
     <div class="current-user">
-        <a class="nav-item" href="user-select.php">
+        <div>
             <?php if (isset($_SESSION["name"])) {
                 echo h($_SESSION["name"]) . "さん";
             } ?>
-        </a>
+        </div>
+        <div class="user-menu">
+            <span class="close">×</span>
+            <ul>
+                <li><a href="user-select.php">設定</a></li>
+                <li><a href="select.php">自分の口コミ一覧</a></li>
+                <li><a href="logout.php">ログアウト</a></li>
+            </ul>
+        </div>
     </div>
 </header>
