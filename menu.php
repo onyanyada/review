@@ -29,13 +29,13 @@ include_once("funcs.php");
                 echo h($_SESSION["name"]) . "さん";
             } ?>
         </div>
-        <div class="user-menu">
-            <span class="close">×</span>
-            <ul>
-                <li><a href="user-select.php">設定</a></li>
-                <li><a href="select.php">自分の口コミ一覧</a></li>
-                <li><a href="logout.php">ログアウト</a></li>
-            </ul>
-        </div>
+    </div>
+    <div class="user-menu">
+        <ul>
+            <li><a href="user-select.php">設定</a></li>
+            <li><a href="select.php">自分の口コミ一覧</a></li>
+            <li><a href="logout.php">ログアウト</a></li>
+        </ul>
+        <span class="close">×</span>
     </div>
 </header>

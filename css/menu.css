@@ -5,8 +5,10 @@
 .user-menu {
     display: none;
     position: absolute;
-    top: 50px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
+    width: 100px;
+    height: 100px;
     background-color: #fff;
 }
 
@@ -14,4 +16,8 @@
     display: flex;
     flex-flow: column;
     text-align: left;
+}
+
+.close {
+    cursor: pointer;
 }
