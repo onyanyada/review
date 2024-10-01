@@ -6,7 +6,7 @@ include("funcs.php");
 $product_name        = $_SESSION["product_name"];
 $category1       = $_SESSION["category1"];
 $category2    = $_SESSION["category2"];
-$tagstr      = $_SESSION["tagstr"];
+$tag      = $_SESSION["tag"];
 
 ?>
 
@@ -50,7 +50,7 @@ $tagstr      = $_SESSION["tagstr"];
                 </tr>
                 <tr>
                     <td>タグ</td>
-                    <td><?= h($tagstr) ?></td>
+                    <td><?= h($tag) ?></td>
                 </tr>
             </table>
 

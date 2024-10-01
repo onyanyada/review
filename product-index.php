@@ -56,9 +56,7 @@ if (!isset($_SESSION['lid'])) {
                     <tr>
                         <td>タグ</td>
                         <td>
-                            <input type='checkbox' name='tag[]' value='さっぱり'>さっぱり
-                            <input type='checkbox' name='tag[]' value='温まる'>温まる
-                            <input type='checkbox' name='tag[]' value='こってり'>こってり
+                            <input type="text" name="tag" placeholder="タグをカンマで区切って入力">
                         </td>
                     </tr>
                 </table>

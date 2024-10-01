@@ -1,5 +1,4 @@
 <?php
-ini_set("display_errors", 1);
 session_start();
 
 //1. POSTデータ取得
@@ -7,14 +6,14 @@ $product_name  = $_POST["product_name"];
 $category1 = $_POST["category1"];
 $category2 = $_POST["category2"];
 $tag = $_POST["tag"];
-var_dump($tag);
+$tags = explode(',', $tag); // カンマで分割して配列に変換
+
 
 // セッションにデータを保存
 $_SESSION["product_name"] = $product_name;
 $_SESSION["category1"] = $category1;
 $_SESSION["category2"] = $category2;
-$_SESSION["tag"] = isset($_POST['tag']) ? $_POST['tag'] : [];
-$_SESSION["tagstr"] = is_array($tag) ? implode(",", $tag) : ""; // タグが配列かどうかを確認してからimplode
+$_SESSION["tag"] = $tag;
 
 //2. DB接続します
 include("funcs.php");
@@ -31,12 +30,12 @@ $stmt->bindValue(':category2', $category2, PDO::PARAM_STR);
 $status = $stmt->execute(); //実行
 $lastInsertId = $pdo->lastInsertId(); // form2_tableに挿入されたIDを取得
 
-var_dump($tag);
+
 //４．データ登録処理後
 if ($status == false) {
     sql_error($stmt);
 } else {
-    foreach ($tag as $t) {
+    foreach ($tags as $t) {
         $tag_stmt = $pdo->prepare("INSERT INTO tag (tag, product_id) VALUES (:tag, :product_id)");
         $tag_stmt->bindValue(':tag', $t, PDO::PARAM_STR);
         $tag_stmt->bindValue(':product_id', $lastInsertId, PDO::PARAM_INT); // form2_tableのIDを関連付ける

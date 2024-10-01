@@ -4,7 +4,8 @@ session_start();
 $product_name  = $_POST["product_name"];
 $category1 = $_POST["category1"];
 $category2 = $_POST["category2"];
-$tag = isset($_POST['tag']) ? $_POST['tag'] : [];
+$tag = $_POST["tag"];
+$tags = explode(',', $tag); // カンマで分割して配列に変換
 $id = $_POST["id"];
 
 //2. DB接続します
@@ -43,7 +44,7 @@ if ($delete_status == false) {
 }
 
 // timeZone が送信されている場合は新たに挿入する
-foreach ($tag as $t) {
+foreach ($tags as $t) {
     $insert_stmt = $pdo->prepare("INSERT INTO tag (tag, product_id) VALUES (:tag, :product_id)");
     $insert_stmt->bindValue(':tag', $t, PDO::PARAM_STR);
     $insert_stmt->bindValue(':product_id', $id, PDO::PARAM_INT);

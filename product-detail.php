@@ -14,12 +14,12 @@ sschk();
 $pdo = db_conn();
 
 //２．データ登録SQL作成
-// form2_table
+// product
 $stmt = $pdo->prepare("SELECT * FROM product WHERE id=:id");
 $stmt->bindValue(":id", $id, PDO::PARAM_INT);
 $status = $stmt->execute();
 
-// tz_table
+// tag
 $tag_stmt = $pdo->prepare("SELECT tag FROM tag WHERE product_id = :id");
 $tag_stmt->bindValue(':id', $id, PDO::PARAM_INT);
 $tag_status = $tag_stmt->execute();
@@ -37,8 +37,10 @@ if ($status == false) {
 if ($tag_status == false) {
     sql_error($tag_stmt);
 } else {
-    $tag = $tag_stmt->fetchAll(PDO::FETCH_COLUMN); // timeZone の配列を取得
+    $tag = $tag_stmt->fetchAll(PDO::FETCH_COLUMN); // 配列を取得
 }
+
+$tags = implode(',', $tag);
 ?>
 
 
@@ -83,10 +85,7 @@ if ($tag_status == false) {
                 <tr>
                     <td>タグ</td>
                     <td>
-
-                        <input type='checkbox' name='tag[]' value='さっぱり' <?= in_array('さっぱり', $tag) ? 'checked' : ''; ?>>さっぱり
-                        <input type='checkbox' name='tag[]' value='温まる' <?= in_array('温まる', $tag) ? 'checked' : ''; ?>>温まる
-                        <input type='checkbox' name='tag[]' value='こってり' <?= in_array('こってり', $tag) ? 'checked' : ''; ?>>こってり
+                        <input type="text" name="tag" value="<?= h($tags) ?>">
                     </td>
                 </tr>
             </table>
