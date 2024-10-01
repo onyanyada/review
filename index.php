@@ -30,9 +30,24 @@ $product_id = $_GET["product_id"];
     <main>
         <div class="form-wrapper">
             <form action="insert.php" method="post" enctype="multipart/form-data">
-                評価: <input type="number" name="rating" min="1" max="5"><br>
-                口コミ: <textarea name="review"></textarea><br>
-                画像: <input type="file" name="image"><br>
+                <table>
+                    <tr>
+                        <td>評価</td>
+                        <td><input type="number" name="rating" min="1" max="5"></td>
+                    </tr>
+                    <tr>
+                        <td>口コミ</td>
+                        <td>
+                            <textarea name="review"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>画像</td>
+                        <td>
+                            <input type="file" name="image">
+                        </td>
+                    </tr>
+                </table>
                 <input type="hidden" name="product_id" value="<?= h($product_id) ?>">
                 <button type="submit">投稿</button>
             </form>

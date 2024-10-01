@@ -11,15 +11,73 @@ include("funcs.php");
 //2. DB接続します
 $pdo = db_conn();
 
+// タグ一覧の取得クエリ
+$sql_tag = "SELECT DISTINCT tag FROM tag";
+$stmt_tag = $pdo->prepare($sql_tag);
+$status_tag = $stmt_tag->execute();
+
+if ($status_tag == false) {
+    sql_error($stmt_tag);
+}
+
+// タグを全て取得
+$tags_list = $stmt_tag->fetchAll(PDO::FETCH_ASSOC);
+
+
+// フォームから検索条件を取得
+$category1 = isset($_GET['category1']) ? $_GET['category1'] : '';
+$category2 = isset($_GET['category2']) ? $_GET['category2'] : '';
+$tags = isset($_GET['tags']) ? $_GET['tags'] : [];
+$keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+
 // クエリの作成
-// $sql = "SELECT * FROM product";
 $sql = "SELECT f.*, GROUP_CONCAT(t.tag SEPARATOR ', ') AS tag 
         FROM product f
         LEFT JOIN tag t ON f.id = t.product_id 
-        GROUP BY f.id";
+        WHERE 1=1";
+
+// カテゴリ1の条件追加（正確な一致）
+if (!empty($category1)) {
+    $sql .= " AND f.category1 = :category1";
+}
+// カテゴリ2の条件追加（正確な一致）
+if (!empty($category2)) {
+    $sql .= " AND f.category2 = :category2";
+}
+// 検索ワードの条件追加（部分一致検索）
+if (!empty($keyword)) {
+    $sql .= " AND (f.product_name LIKE :keyword OR f.category1 LIKE :keyword OR f.category2 LIKE :keyword)";
+}
+
+// タグの条件追加（複数のタグを含む商品を検索）
+if (!empty($tags)) {
+    // 複数のタグを検索するクエリ
+    $placeholders = implode(',', array_fill(0, count($tags), '?')); // 例: "?, ?, ?"
+    $sql .= " AND t.tag IN ($placeholders)";
+}
+
+$sql .= " GROUP BY f.id";
 
 // SQL実行の準備
 $stmt = $pdo->prepare($sql);
+
+// パラメータバインディング
+if (!empty($category1)) {
+    $stmt->bindValue(':category1', $category1, PDO::PARAM_STR);
+}
+if (!empty($category2)) {
+    $stmt->bindValue(':category2', $category2, PDO::PARAM_STR);
+}
+if (!empty($keyword)) {
+    $stmt->bindValue(':keyword', "%$keyword%", PDO::PARAM_STR);
+}
+
+// タグのバインディング
+if (!empty($tags)) {
+    foreach ($tags as $index => $tag) {
+        $stmt->bindValue(($index + 1), $tag, PDO::PARAM_STR); // ?プレースホルダーにタグをバインド
+    }
+}
 
 // SQL実行
 $status = $stmt->execute();
@@ -50,6 +108,37 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <main>
         <h2>商品一覧</h2>
+        <!-- 商品検索 -->
+        <form method="GET" action="">
+            <label for="category1">カテゴリ1:</label>
+            <select name="category1" id="category1">
+                <option value="">すべて</option>
+                <option value="肉">肉</option>
+                <option value="魚">魚</option>
+                <option value="菓子">菓子</option>
+            </select>
+
+            <label for="category2">カテゴリ2:</label>
+            <select name="category2" id="category2">
+                <option value="">すべて</option>
+                <option value="肉">肉</option>
+                <option value="魚">魚</option>
+                <option value="菓子">菓子</option>
+            </select>
+
+            <label>タグ:</label>
+            <?php foreach ($tags_list as $tag) { ?>
+                <label>
+                    <input type="checkbox" name="tags[]" value="<?= h($tag['tag']) ?>">
+                    <?= h($tag['tag']) ?>
+                </label>
+            <?php } ?>
+
+            <label for="keyword">検索ワード:</label>
+            <input type="text" name="keyword" id="keyword">
+            <button type="submit">検索</button>
+        </form>
+
         <table>
             <?php foreach ($values as $v) {
             ?>
