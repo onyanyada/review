@@ -75,11 +75,8 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
     </div>
     <!-- Main[End] -->
 
-
-    <script>
-        const a = '<?php echo $json; ?>';
-        console.log(JSON.parse(a));
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

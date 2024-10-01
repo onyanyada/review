@@ -62,9 +62,8 @@ if ($status == false) {
     <a href="all-select.php?product_id=<?= $product_id ?>">一覧に戻る</a>
     </main>
 
-    <!-- ここまで -->
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

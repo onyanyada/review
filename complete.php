@@ -51,8 +51,8 @@ $product_id = $_SESSION["product_id"];
         <a class="back" href="all-select.php?product_id=<?= $product_id ?>">戻る</a>
 
     </main>
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

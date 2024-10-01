@@ -45,7 +45,8 @@ session_start();
             <button type="button" onclick="history.back()">戻る</button>
         </form>
     </main>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="js/menu.js"></script>
 </body>
 
 </html>

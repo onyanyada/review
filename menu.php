@@ -4,13 +4,7 @@ include_once("funcs.php");
 <header class="login-header">
     <div class="nav">
         <ul>
-            <li>
-                <a class="nav-item" href="all-select.php">皆の口コミ一覧</a>
-            </li>
             <?php if (isset($_SESSION["name"])) { ?>
-                <li>
-                    <a class="nav-item" href="index.php">口コミ投稿</a>
-                </li>
                 <li>
                     <a class="nav-item" href="product-index.php">商品登録</a>
                 </li>
