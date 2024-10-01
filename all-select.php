@@ -54,6 +54,13 @@ if ($status == false) {
 
 //全データ取得
 $values =  $stmt->fetchAll(PDO::FETCH_ASSOC); //PDO::FETCH_ASSOC[カラム名のみで取得できるモード]
+
+// ログインしていない場合、口コミを3つまでに制限
+if (!isset($_SESSION["name"])) {
+    $values = array_slice($values, 0, 3); // 最初の3つを取得
+}
+
+// json
 $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 ?>
 
@@ -117,6 +124,9 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                 </tr>
             <?php } ?>
         </table>
+        <?php if (!isset($_SESSION["name"])) { ?>
+            <a href="login.php">もっと見るためにログインする</a>
+        <?php } ?>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
