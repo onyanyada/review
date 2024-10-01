@@ -13,7 +13,7 @@ if (!isset($_SESSION['lid'])) {
 
 
 <?php include("head.php"); ?>
-<title>フリーアンケート表示</title>
+<title>口コミ</title>
 <link rel="stylesheet" href="css/index.css">
 </head>
 

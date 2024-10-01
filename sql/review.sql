@@ -4,6 +4,6 @@ CREATE TABLE review (
     rating INT NOT NULL,
     review_text TEXT NOT NULL,
     image_path VARCHAR(255),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    indate datetime NOT NULL,
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
 );
