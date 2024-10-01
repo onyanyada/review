@@ -9,6 +9,9 @@ if (!isset($_SESSION['lid'])) {
     header("Location: login.php");
     exit();
 }
+
+$product_id = $_GET["product_id"];
+
 ?>
 
 
@@ -30,6 +33,7 @@ if (!isset($_SESSION['lid'])) {
                 評価: <input type="number" name="rating" min="1" max="5"><br>
                 口コミ: <textarea name="review"></textarea><br>
                 画像: <input type="file" name="image"><br>
+                <input type="hidden" name="product_id" value="<?= h($product_id) ?>">
                 <button type="submit">投稿</button>
             </form>
         </div>

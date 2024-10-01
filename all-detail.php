@@ -11,6 +11,9 @@ if (!isset($_GET["id"]) || empty($_GET["id"])) {
 $id = $_GET["id"]; //?id~**を受け取る
 include("funcs.php");
 sschk();
+
+$product_id = $_SESSION["product_id"];
+
 $pdo = db_conn();
 
 //２．データ登録SQL作成
@@ -56,7 +59,7 @@ if ($status == false) {
             </tr>
         </table>
     </div>
-    <a href="all-select.php">一覧に戻る</a>
+    <a href="all-select.php?product_id=<?= $product_id ?>">一覧に戻る</a>
     </main>
 
     <!-- ここまで -->

@@ -41,7 +41,7 @@ if ($val) {
     $_SESSION["lid"]      = $val['lid'];
     $_SESSION["name"]      = $val['name'];
     //Login成功時（select.phpへ）
-    redirect("select.php");
+    redirect("all-select.php");
     // redirect("user-select.php");
   } else {
     //Login失敗時(login.phpへ)

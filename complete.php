@@ -7,7 +7,7 @@ sschk();
 $rating        = isset($_SESSION["rating"]) ? $_SESSION["rating"] : 'なし';
 $review       = isset($_SESSION["review"]) ? $_SESSION["review"] : 'なし';
 $image    = isset($_SESSION["image"]) ? $_SESSION["image"] : 'なし';
-
+$product_id = $_SESSION["product_id"];
 ?>
 
 <?php include("head.php"); ?>
@@ -37,12 +37,18 @@ $image    = isset($_SESSION["image"]) ? $_SESSION["image"] : 'なし';
                 </tr>
                 <tr>
                     <td>画像</td>
-                    <td><img src="<?= h($image) ?>" alt=""></td>
+                    <td>
+                        <?php if ($image && file_exists($image)) : ?>
+                            <img src="<?= h($image) ?>" alt="">
+                        <?php else : ?>
+                            画像なし
+                        <?php endif; ?>
+                    </td>
                 </tr>
             </table>
 
         </div>
-        <a class="back" href="index.php">戻る</a>
+        <a class="back" href="all-select.php?product_id=<?= $product_id ?>">戻る</a>
 
     </main>
 

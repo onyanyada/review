@@ -5,6 +5,7 @@ session_start();
 $rating  = $_POST["rating"];
 $review = $_POST["review"];
 $image = $_FILES["image"];
+$product_id = $_POST["product_id"];
 
 // 画像ファイルの処理
 if ($image["error"] == 0) {
@@ -25,13 +26,15 @@ if ($image["error"] == 0) {
     exit();
   }
 } else {
-  $image_path = null; // 画像がアップロードされていない場合
+  // 画像がアップロードされていない場合、セッションから削除
+  unset($_SESSION["image"]); // セッションから画像を削除
+  $image_path = null;
 }
 
 // セッションにデータを保存
 $_SESSION["rating"] = $rating;
 $_SESSION["review"] = $review;
-
+$_SESSION["product_id"] = $product_id;
 
 //2. DB接続します
 include("funcs.php");
@@ -52,10 +55,11 @@ if (!$user) {
 $user_id = $user['id']; // userテーブルから取得したユーザーID
 
 //３．データ登録SQL作成
-$stmt = $pdo->prepare("INSERT INTO review(user_id,rating,review,image,indate)
-VALUES(:user_id,:rating,:review,:image,sysdate())");
+$stmt = $pdo->prepare("INSERT INTO review(user_id,product_id,rating,review,image,indate)
+VALUES(:user_id,:product_id,:rating,:review,:image,sysdate())");
 
 $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+$stmt->bindValue(':product_id', $product_id, PDO::PARAM_INT);
 $stmt->bindValue(':rating', $rating, PDO::PARAM_INT);
 $stmt->bindValue(':review', $review, PDO::PARAM_STR);
 $stmt->bindValue(':image', $image_path, PDO::PARAM_STR);

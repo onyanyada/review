@@ -4,15 +4,15 @@ session_start();
 
 //１．関数群の読み込み
 include("funcs.php");
+$product_id = $_GET["product_id"];
+$_SESSION["product_id"] = $product_id;
 
-//LOGINチェック → funcs.phpへ関数化しましょう！
-// sschk();
 
 //2. DB接続します
 $pdo = db_conn();
 
 // クエリの作成
-$sql = "SELECT * FROM review";
+$sql = "SELECT * FROM review WHERE product_id = :product_id";
 
 // 絞り込みがある場合のクエリの追加
 if (isset($_GET['rating_filter']) && $_GET['rating_filter'] != "") {
@@ -36,7 +36,7 @@ if (isset($_GET['sort'])) {
 
 // SQL実行の準備
 $stmt = $pdo->prepare($sql);
-
+$stmt->bindValue(":product_id", $product_id, PDO::PARAM_INT);
 // 絞り込みのための値をバインド
 if (isset($_GET['rating_filter']) && $_GET['rating_filter'] != "") {
     $stmt->bindValue(':rating_filter', $_GET['rating_filter'], PDO::PARAM_INT);
@@ -127,6 +127,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
         <?php if (!isset($_SESSION["name"])) { ?>
             <a href="login.php">もっと見るためにログインする</a>
         <?php } ?>
+        <a href="index.php?product_id=<?= $product_id ?>">この商品を口コミする</a>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -51,12 +51,14 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
     <main>
         <h2>商品一覧</h2>
         <table>
-            <?php foreach ($values as $v) { ?>
+            <?php foreach ($values as $v) {
+            ?>
                 <tr>
                     <th>商品名</th>
                     <th>カテゴリ1</th>
                     <th>カテゴリ2</th>
                     <th>タグ</th>
+                    <th>口コミ</th>
                     <th>詳細</th>
                     <th>削除</th>
                 </tr>
@@ -65,6 +67,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     <td><?= $v["category1"] ?></td>
                     <td><?= $v["category2"] ?></td>
                     <td><?= $v["tag"] ?></td>
+                    <td><a href="all-select.php?product_id=<?= $v["id"] ?>">口コミ</a></td>
                     <td><a href="product-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
                     <td><a href="product-delete.php?id=<?= $v["id"] ?>">[削除]</a></td>
                 </tr>
