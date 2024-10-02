@@ -104,6 +104,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     <th>口コミ内容</th>
                     <th>投稿画像</th>
                     <th>投稿日</th>
+                    <th>いいね</th>
                     <th>詳細</th>
                 </tr>
                 <tr>
@@ -120,6 +121,10 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     </td>
                     <td><img src="<?= $v["image"] ?>" alt=""></td>
                     <td><?= mb_substr($v["indate"], 0, 10) ?></td>
+                    <td>
+                        <span class="like-count" id="like-count-<?= $v['id'] ?>"><?= $v["like_count"] ?></span> <!-- いいね数表示 -->
+                        <button class="like-btn" data-review-id="<?= $v['id'] ?>">いいね</button> <!-- いいねボタン -->
+                    </td>
                     <td><a href="all-detail.php?id=<?= $v["id"] ?>">[詳細]</a></td>
                 </tr>
             <?php } ?>
@@ -132,6 +137,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/like.js"></script>
 </body>
 
 </html>

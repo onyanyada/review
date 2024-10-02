@@ -6,6 +6,7 @@ CREATE TABLE review (
     review TEXT NOT NULL,
     image VARCHAR(255),
     indate datetime NOT NULL,
+    like_count INT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
