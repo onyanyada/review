@@ -145,8 +145,6 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                 <th>カテゴリ2</th>
                 <th>タグ</th>
                 <th>口コミ</th>
-                <th>詳細</th>
-                <th>削除</th>
             </tr>
             <?php foreach ($values as $v) { ?>
 
@@ -156,8 +154,6 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     <td><?= $v["category2"] ?></td>
                     <td><?= $v["tag"] ?></td>
                     <td><a href="all-select.php?product_id=<?= $v["id"] ?>">口コミ</a></td>
-                    <td><a href="product-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
-                    <td><a href="product-delete.php?id=<?= $v["id"] ?>">[削除]</a></td>
                 </tr>
             <?php } ?>
         </table>
