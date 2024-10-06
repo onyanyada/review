@@ -36,31 +36,32 @@ if ($status == false) {
 <body>
     <?php include("menu.php"); ?>
 
+    <main>
 
+        <h2>ユーザーデータ更新</h2>
 
-    <h2>ユーザーデータ更新</h2>
+        <form method="POST" action="user-update.php">
 
-    <form method="POST" action="user-update.php">
+            <legend>[編集]</legend>
+            <label>名前：<input type="text" name="name" value="<?= h($row["name"]) ?>"></label><br>
+            <label>Login ID：<input type="text" name="lid" value="<?= h($row["lid"]) ?>"></label><br>
+            <label>新しいパスワード：<input type="password" name="lpw"></label><br>
+            <label>退会</label>
+            <label>
+                <input type="radio" name="life_flg" value="0" <?= $row["life_flg"] == "0" ? "checked" : "" ?>> 退会しない
+            </label>
+            <label>
+                <input type="radio" name="life_flg" value="1" <?= $row["life_flg"] == "1" ? "checked" : "" ?>> 退会する
+            </label><br>
+            <input type="submit" value="送信">
+            <input type="hidden" name="id" value="<?= $id ?>">
 
-        <legend>[編集]</legend>
-        <label>名前：<input type="text" name="name" value="<?= h($row["name"]) ?>"></label><br>
-        <label>Login ID：<input type="text" name="lid" value="<?= h($row["lid"]) ?>"></label><br>
-        <label>新しいパスワード：<input type="password" name="lpw"></label><br>
-        <label>退会</label>
-        <label>
-            <input type="radio" name="life_flg" value="0" <?= $row["life_flg"] == "0" ? "checked" : "" ?>> 退会しない
-        </label>
-        <label>
-            <input type="radio" name="life_flg" value="1" <?= $row["life_flg"] == "1" ? "checked" : "" ?>> 退会する
-        </label><br>
-        <input type="submit" value="送信">
-        <input type="hidden" name="id" value="<?= $id ?>">
+        </form>
+        <?php
 
-    </form>
-    <?php
-
-    ?>
-    <a href="user-delete-confirm.php">退会して完全削除する</a>
+        ?>
+        <a href="user-delete-confirm.php">退会して完全削除する</a>
+    </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/menu.js"></script>
 </body>

@@ -99,6 +99,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 <?php include("head.php"); ?>
 <title>商品一覧</title>
 <link rel="stylesheet" href="css/select.css">
+<link rel="stylesheet" href="css/product-select.css">
 </head>
 
 <body>
@@ -109,48 +110,46 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
     <main>
         <h2>商品一覧</h2>
         <!-- 商品検索 -->
-        <form method="GET" action="">
-            <label for="category1">カテゴリ1:</label>
-            <select name="category1" id="category1">
-                <option value="">すべて</option>
-                <option value="肉">肉</option>
-                <option value="魚">魚</option>
-                <option value="菓子">菓子</option>
-            </select>
+        <div class="search">
+            <form method="GET" action="">
+                <label for="category1">カテゴリ1:</label>
+                <select name="category1" id="category1">
+                    <option value="">すべて</option>
+                    <option value="肉">肉</option>
+                    <option value="魚">魚</option>
+                    <option value="菓子">菓子</option>
+                </select>
 
-            <label for="category2">カテゴリ2:</label>
-            <select name="category2" id="category2">
-                <option value="">すべて</option>
-                <option value="肉">肉</option>
-                <option value="魚">魚</option>
-                <option value="菓子">菓子</option>
-            </select>
+                <label for="category2">カテゴリ2:</label>
+                <select name="category2" id="category2">
+                    <option value="">すべて</option>
+                </select>
 
-            <label>タグ:</label>
-            <?php foreach ($tags_list as $tag) { ?>
-                <label>
-                    <input type="checkbox" name="tags[]" value="<?= h($tag['tag']) ?>">
-                    <?= h($tag['tag']) ?>
-                </label>
-            <?php } ?>
+                <label>タグ:</label>
+                <?php foreach ($tags_list as $tag) { ?>
+                    <label>
+                        <input type="checkbox" name="tags[]" value="<?= h($tag['tag']) ?>">
+                        <?= h($tag['tag']) ?>
+                    </label>
+                <?php } ?>
 
-            <label for="keyword">検索ワード:</label>
-            <input type="text" name="keyword" id="keyword">
-            <button type="submit">検索</button>
-        </form>
-
+                <label for="keyword">検索ワード:</label>
+                <input type="text" name="keyword" id="keyword">
+                <button type="submit">検索</button>
+            </form>
+        </div>
         <table>
-            <?php foreach ($values as $v) {
-            ?>
-                <tr>
-                    <th>商品名</th>
-                    <th>カテゴリ1</th>
-                    <th>カテゴリ2</th>
-                    <th>タグ</th>
-                    <th>口コミ</th>
-                    <th>詳細</th>
-                    <th>削除</th>
-                </tr>
+            <tr>
+                <th>商品名</th>
+                <th>カテゴリ1</th>
+                <th>カテゴリ2</th>
+                <th>タグ</th>
+                <th>口コミ</th>
+                <th>詳細</th>
+                <th>削除</th>
+            </tr>
+            <?php foreach ($values as $v) { ?>
+
                 <tr>
                     <td><?= $v["product_name"] ?></td>
                     <td><?= $v["category1"] ?></td>
@@ -166,6 +165,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/menu.js"></script>
+    <script src="js/product-select.js"></script>
 </body>
 
 </html>

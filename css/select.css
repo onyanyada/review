@@ -2,10 +2,7 @@ header {
     text-align: center;
 }
 
-main {
-    max-width: 1300px;
-    margin: 0 auto;
-}
+
 
 .results {
     display: flex;
@@ -37,14 +34,13 @@ table {
 }
 
 tr:nth-child(even) {
-    background-color: #BFC7CE;
+    background-color: #F1F0F6;
 }
 
 th {
-    background-color: #6c7277;
+    background-color: #b3b1b1;
     color: white;
     padding: 12px 15px;
-    /* border: 1px solid #ddd; */
     text-align: center;
     vertical-align: middle;
 }

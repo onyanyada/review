@@ -54,45 +54,47 @@ $tags = implode(',', $tag);
 
     <!-- header -->
     <?php include("menu.php"); ?>
-    <h2>商品編集</h2>
-    <div class="form-wrapper">
-        <form action="product-update.php" method="post">
-            <table>
-                <tr>
-                    <td>商品名</td>
-                    <td><input type="text" name="product_name" value="<?= h($row['product_name']) ?>" required></td>
-                </tr>
-                <tr>
-                    <td>カテゴリ1</td>
-                    <td>
-                        <select name="category1">
-                            <option value="肉" <?= $row['category1'] == "肉" ? 'selected' : '' ?>>肉</option>
-                            <option value="魚" <?= $row['category1'] == "魚" ? 'selected' : '' ?>>魚</option>
-                            <option value="菓子" <?= $row['category1'] == "菓子" ? 'selected' : '' ?>>菓子</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>カテゴリ2</td>
-                    <td>
-                        <select name="category2">
-                            <option value="肉" <?= $row['category2'] == "肉" ? 'selected' : '' ?>>肉</option>
-                            <option value="魚" <?= $row['category2'] == "魚" ? 'selected' : '' ?>>魚</option>
-                            <option value="菓子" <?= $row['category2'] == "菓子" ? 'selected' : '' ?>>菓子</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>タグ</td>
-                    <td>
-                        <input type="text" name="tag" value="<?= h($tags) ?>">
-                    </td>
-                </tr>
-            </table>
-            <button type="submit">更新</button>
-            <input type="hidden" name="id" value="<?= h($id) ?>">
-        </form>
-    </div>
+
+    <main>
+        <h2>商品編集</h2>
+        <div class="form-wrapper">
+            <form action="product-update.php" method="post">
+                <table>
+                    <tr>
+                        <td>商品名</td>
+                        <td><input type="text" name="product_name" value="<?= h($row['product_name']) ?>" required></td>
+                    </tr>
+                    <tr>
+                        <td>カテゴリ1</td>
+                        <td>
+                            <select name="category1">
+                                <option value="肉" <?= $row['category1'] == "肉" ? 'selected' : '' ?>>肉</option>
+                                <option value="魚" <?= $row['category1'] == "魚" ? 'selected' : '' ?>>魚</option>
+                                <option value="菓子" <?= $row['category1'] == "菓子" ? 'selected' : '' ?>>菓子</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>カテゴリ2</td>
+                        <td>
+                            <select name="category2">
+                                <option value="肉" <?= $row['category2'] == "肉" ? 'selected' : '' ?>>肉</option>
+                                <option value="魚" <?= $row['category2'] == "魚" ? 'selected' : '' ?>>魚</option>
+                                <option value="菓子" <?= $row['category2'] == "菓子" ? 'selected' : '' ?>>菓子</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>タグ</td>
+                        <td>
+                            <input type="text" name="tag" value="<?= h($tags) ?>">
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit">更新</button>
+                <input type="hidden" name="id" value="<?= h($id) ?>">
+            </form>
+        </div>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

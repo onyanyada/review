@@ -35,31 +35,34 @@ if ($status == false) {
 
 
 <?php include("head.php"); ?>
+<link rel="stylesheet" href="css/index.css">
+<link rel="stylesheet" href="css/common.css">
 <title>口コミ詳細</title>
 </head>
 
 <body>
 
     <?php include("menu.php"); ?>
-    <h2>口コミ詳細</h2>
+    <main>
+        <h2>口コミ詳細</h2>
 
-    <div class="form-wrapper">
-        <table>
-            <tr>
-                <td>評価</td>
-                <td><?= h($row['rating']) ?></td>
-            </tr>
-            <tr>
-                <td>口コミ</td>
-                <td><?= h($row['review']) ?></td>
-            </tr>
-            <tr>
-                <td>画像</td>
-                <td><img src="<?= h($row['image']) ?>" alt=""></td>
-            </tr>
-        </table>
-    </div>
-    <a href="all-select.php?product_id=<?= $product_id ?>">一覧に戻る</a>
+        <div class="form-wrapper">
+            <table>
+                <tr>
+                    <td>評価</td>
+                    <td><?= h($row['rating']) ?></td>
+                </tr>
+                <tr>
+                    <td>口コミ</td>
+                    <td><?= h($row['review']) ?></td>
+                </tr>
+                <tr>
+                    <td>画像</td>
+                    <td><img src="<?= h($row['image']) ?>" alt=""></td>
+                </tr>
+            </table>
+        </div>
+        <a href="all-select.php?product_id=<?= $product_id ?>" class="link">一覧に戻る</a>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

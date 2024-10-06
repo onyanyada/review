@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 li {
     list-style: none;
 }
@@ -5,4 +10,10 @@ li {
 body {
     margin: 0;
     padding: 0;
+}
+
+ul {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    padding-inline-start: 0px;
 }

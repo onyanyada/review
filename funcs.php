@@ -14,7 +14,7 @@ function db_conn()
     $db_pw   = "nyanko";   //パスワード：XAMPPはパスワード無し or MAMPはパスワード”root”に修正してください。
     $db_host = "localhost"; //DBホスト
 
-    // $db_name = "studiohub_gs_db";    //データベース名
+    // $db_name = "studiohub_review";    //データベース名
     // $db_id   = "studiohub";      //アカウント名
     // $db_pw   = "b_3FVwSWrcYY";   //パスワード：XAMPPはパスワード無し or MAMPはパスワード”root”に修正してください。
     // $db_host = "mysql3101.db.sakura.ne.jp"; //DBホスト

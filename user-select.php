@@ -41,38 +41,39 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <!-- header -->
     <?php include("menu.php"); ?>
+    <main>
 
+        <!-- Main[Start] -->
+        <div>
 
-    <!-- Main[Start] -->
-    <div>
-
-        <div class="user-info">
-            <h2>プロフィール設定</h2>
-            <table>
-                <tr>
-                    <th>名前</th>
-                    <th>ログインID</th>
-                    <th>パスワード</th>
-                    <th>更新</th>
-                </tr>
-                <?php foreach ($values as $v) { ?>
+            <div class="user-info">
+                <h2>プロフィール設定</h2>
+                <table>
                     <tr>
-                        <td><?= h($v["name"]) ?></td>
-                        <td><?= h($v["lid"]) ?></td>
-                        <td><?= h($v["lpw"]) ?></td>
-                        <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
+                        <th>名前</th>
+                        <th>ログインID</th>
+                        <th>パスワード</th>
+                        <th>更新</th>
                     </tr>
-                <?php } ?>
-            </table>
-        </div>
-        <p>
-            <a class="" href="select.php">自分の口コミ一覧を見る</a>
-        </p>
-        <p>
-            <a class="nav-item" href="logout.php">ログアウト</a>
-        </p>
+                    <?php foreach ($values as $v) { ?>
+                        <tr>
+                            <td><?= h($v["name"]) ?></td>
+                            <td><?= h($v["lid"]) ?></td>
+                            <td><?= h($v["lpw"]) ?></td>
+                            <td><a href="user-detail.php?id=<?= $v["id"] ?>">[更新]</a></td>
+                        </tr>
+                    <?php } ?>
+                </table>
+            </div>
+            <div>
+                <a class="" href="select.php" class="link">自分の口コミ一覧を見る</a>
+            </div>
+            <div>
+                <a class="nav-item" href="logout.php" class="link">ログアウト</a>
+            </div>
 
-    </div>
+        </div>
+    </main>
     <!-- Main[End] -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

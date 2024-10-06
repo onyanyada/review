@@ -67,6 +67,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 <?php include("head.php"); ?>
 <title>皆の口コミ一覧</title>
 <link rel="stylesheet" href="css/select.css">
+<link rel="stylesheet" href="css/product-select.css">
 </head>
 
 <body>
@@ -76,37 +77,40 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
 
     <main>
         <h2>皆の口コミ一覧</h2>
-        <form method="GET" action="">
-            <label for="sort">並び替え:</label>
-            <select name="sort" id="sort">
-                <option value="date_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_desc') ? 'selected' : '' ?>>新しい順</option>
-                <option value="date_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_asc') ? 'selected' : '' ?>>古い順</option>
-                <option value="rating_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'rating_desc') ? 'selected' : '' ?>>評価が高い順</option>
-                <option value="rating_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'rating_asc') ? 'selected' : '' ?>>評価が低い順</option>
-            </select>
+        <div class="search">
+            <form method="GET" action="">
+                <label for="sort">並び替え:</label>
+                <select name="sort" id="sort">
+                    <option value="date_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_desc') ? 'selected' : '' ?>>新しい順</option>
+                    <option value="date_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'date_asc') ? 'selected' : '' ?>>古い順</option>
+                    <option value="rating_desc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'rating_desc') ? 'selected' : '' ?>>評価が高い順</option>
+                    <option value="rating_asc" <?= (isset($_GET['sort']) && $_GET['sort'] == 'rating_asc') ? 'selected' : '' ?>>評価が低い順</option>
+                </select>
 
-            <label for="rating_filter">評価の絞り込み:</label>
-            <select name="rating_filter" id="rating_filter">
-                <option value="">すべて</option>
-                <option value="5" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '5') ? 'selected' : '' ?>>5</option>
-                <option value="4" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '4') ? 'selected' : '' ?>>4</option>
-                <option value="3" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '3') ? 'selected' : '' ?>>3</option>
-                <option value="2" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '2') ? 'selected' : '' ?>>2</option>
-                <option value="1" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '1') ? 'selected' : '' ?>>1</option>
-            </select>
+                <label for="rating_filter">評価の絞り込み:</label>
+                <select name="rating_filter" id="rating_filter">
+                    <option value="">すべて</option>
+                    <option value="5" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '5') ? 'selected' : '' ?>>5</option>
+                    <option value="4" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '4') ? 'selected' : '' ?>>4</option>
+                    <option value="3" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '3') ? 'selected' : '' ?>>3</option>
+                    <option value="2" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '2') ? 'selected' : '' ?>>2</option>
+                    <option value="1" <?= (isset($_GET['rating_filter']) && $_GET['rating_filter'] == '1') ? 'selected' : '' ?>>1</option>
+                </select>
 
-            <button type="submit">適用</button>
-        </form>
+                <button type="submit">適用</button>
+            </form>
+        </div>
         <table>
+            <tr>
+                <th>評価</th>
+                <th>口コミ内容</th>
+                <th>投稿画像</th>
+                <th>投稿日</th>
+                <th>いいね</th>
+                <th>詳細</th>
+            </tr>
             <?php foreach ($values as $v) { ?>
-                <tr>
-                    <th>評価</th>
-                    <th>口コミ内容</th>
-                    <th>投稿画像</th>
-                    <th>投稿日</th>
-                    <th>いいね</th>
-                    <th>詳細</th>
-                </tr>
+
                 <tr>
                     <td><?= $v["rating"] ?></td>
                     <td>
@@ -122,8 +126,9 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
                     <td><img src="<?= $v["image"] ?>" alt=""></td>
                     <td><?= mb_substr($v["indate"], 0, 10) ?></td>
                     <td>
+
+                        <button class="like-btn" data-review-id="<?= $v['id'] ?>"><i class="fa-regular fa-heart"></i></button> <!-- いいねボタン -->
                         <span class="like-count" id="like-count-<?= $v['id'] ?>"><?= $v["like_count"] ?></span> <!-- いいね数表示 -->
-                        <button class="like-btn" data-review-id="<?= $v['id'] ?>">いいね</button> <!-- いいねボタン -->
                     </td>
                     <td><a href="all-detail.php?id=<?= $v["id"] ?>">[詳細]</a></td>
                 </tr>
@@ -132,10 +137,14 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
         <?php if (!isset($_SESSION["name"])) { ?>
             <a href="login.php">もっと見るためにログインする</a>
         <?php } ?>
-        <a href="index.php?product_id=<?= $product_id ?>">この商品を口コミする</a>
+        <div class="goRevew">
+            <a href="index.php?product_id=<?= $product_id ?>">この商品を口コミする</a>
+        </div>
     </main>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/8d6b14efb8.js" crossorigin="anonymous"></script>
+
     <script src="js/menu.js"></script>
     <script src="js/like.js"></script>
 </body>

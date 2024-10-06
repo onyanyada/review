@@ -8,3 +8,4 @@
     <link href="css/reset.css" rel="stylesheet">
     <link href="css/nav.css" rel="stylesheet">
     <link href="css/menu.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">

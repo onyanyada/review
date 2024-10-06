@@ -7,8 +7,6 @@
     position: absolute;
     top: 0px;
     right: 0px;
-    width: 100px;
-    height: 100px;
     background-color: #fff;
 }
 
@@ -16,8 +14,14 @@
     display: flex;
     flex-flow: column;
     text-align: left;
+    position: relative;
+    padding: 20px;
+
 }
 
 .close {
     cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
