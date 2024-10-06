@@ -79,6 +79,26 @@ button:hover {
     color: #ffffff;
 }
 
+.uc-btn-wrapper {
+    width: 100%;
+}
+
+.uc-btn {
+    display: flex;
+    width: 210px;
+    margin: 0 auto;
+}
+
+.btn {
+    display: inline-block;
+    width: 100px;
+    margin: 0;
+}
+
+.regibtn {
+    margin-right: 20px;
+}
+
 @media screen and (max-width: 414px) {
     .form-wrapper {
         width: 100%;
