@@ -17,8 +17,9 @@ session_start();
 
     <!-- lLOGINogin_act.php は認証処理用のPHPです。 -->
     <div class="form-wrapper">
-      <table>
-        <form name="form1" action="login_act.php" method="post">
+
+      <form name="form1" action="login_act.php" method="post">
+        <table>
           <tr>
             <td>ID</td>
             <td><input type="text" name="lid"></td>
@@ -27,9 +28,10 @@ session_start();
             <td>PW</td>
             <td><input type="password" name="lpw"></td>
           </tr>
-          <input type="submit" value="ログイン">
-        </form>
-      </table>
+        </table>
+        <button type="submit">ログイン</button>
+      </form>
+
     </div>
   </main>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

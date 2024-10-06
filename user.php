@@ -19,8 +19,9 @@ include "funcs.php";
   <main>
     <h2>ユーザー登録</h2>
     <div class="form-wrapper">
-      <table>
-        <form method="post" action="user-confirm.php">
+
+      <form method="post" action="user-confirm.php">
+        <table>
           <tr>
             <td>名前</td>
             <td><input type="text" name="name"></td>
@@ -33,9 +34,10 @@ include "funcs.php";
             <td>Login PW</td>
             <td><input type="text" name="lpw"></td>
           </tr>
-          <input type="submit" value="送信">
-        </form>
-      </table>
+        </table>
+        <button type="submit">登録</button>
+      </form>
+
     </div>
   </main>
 
